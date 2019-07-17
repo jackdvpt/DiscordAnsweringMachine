@@ -2,7 +2,7 @@ import discord
 
 with open("key.txt" ,"r") as file:
     TOKEN=file.readlines()
-
+print(str(TOKEN))
 client = discord.Client()
 
 @client.event
@@ -19,4 +19,4 @@ async def on_message(message):
         await message.channel.send('Hello!')
 
 
-client.run(TOKEN)
+client.run(str(TOKEN))
