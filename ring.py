@@ -1,7 +1,7 @@
 import discord
 
 with open("key.txt" ,"r") as file:
-    TOKEN=file.read()/replace('\n','')
+    TOKEN=file.read().replace('\n','')
 print(str(TOKEN))
 client = discord.Client()
 
