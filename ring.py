@@ -14,9 +14,9 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$hello'):
+    if message.content.startswith('$ring'):
         print(message.content)
-        await message.channel.send('Hello!')
+        await message.channel.send('Paging the Garrage!')
 
 
 client.run(str(TOKEN))
