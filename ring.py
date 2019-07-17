@@ -1,4 +1,5 @@
 import discord
+import talk
 
 with open("key.txt" ,"r") as file:
     TOKEN=file.read().replace('\n','')
@@ -15,8 +16,10 @@ async def on_message(message):
         return
 
     if message.content.startswith('$ring'):
-        print(message.content)
-        await message.channel.send('Paging the Garrage!')
+        words =message.content[6:]
+        print(words)
+        talk.play(words)
+        await message.channel.send(str('Paging the Garrage! | '+words))
 
 
 client.run(str(TOKEN))
