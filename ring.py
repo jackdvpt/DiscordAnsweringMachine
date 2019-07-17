@@ -1,7 +1,7 @@
 import discord
 
-TOKEN = 'NjAwOTY4MTEzMDU1NTk2NTU1.XS7dWw.bJg320N2VXGS9G50X7hYWar8r4g'
-
+with open("key.txt" ,"r") as file:
+    TOKEN=file.readlines()
 
 client = discord.Client()
 
