@@ -115,6 +115,21 @@ lang = {
     'he': 'Hebrew'
 }
 
+def roundtranslate(string):
+    langs = set()
+    while len(langs) < 30:
+        langs.add(random.choice(list(lang)))
+    translator = Translator()
+    words = string
+    print("Starting String", words)
+    for language in langs:
+        words = translator.translate(string, dest = language).text
+        print(lang[language], words)
+
+
+    return translator.translate(words, dest = "en").text
+
+
 
 def translate(string):
     translator = Translator()
@@ -140,6 +155,7 @@ def play(string, who):
 
 
 if __name__ == '__main__':
-    for i in range(0,10):
-        translate("hello bitches")
+    #for i in range(0,10):
+        #translate("hello bitches")
+    print("end string", roundtranslate("would you like to have a drink after work?"))
     #play("Hello Bitches", "Jack")
