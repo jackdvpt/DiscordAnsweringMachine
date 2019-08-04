@@ -1,5 +1,6 @@
 import discord
 import talk
+import scramble
 
 with open("key.txt" ,"r") as file:
     TOKEN=file.read().replace('\n','')
@@ -23,5 +24,13 @@ async def on_message(message):
         talk.play(words, message.author.display_name)
         await message.channel.send(str('Paging the Garrage! | '+words))
 
+    if message.content.startswith('$scramble'):
+        words =message.content[6:]
+        scramble.roundtranslate(words, message.author.display_name)
+        await message.channel.send(str('Paging the Garrage! | '+words))
+
+    if message.content.startswith("%rick"):
+        talk.play("Hey Google play never gonna give you up", message.author.dispaly_name)
+        await message.channel.send("That felt strange")
 
 client.run(str(TOKEN))
