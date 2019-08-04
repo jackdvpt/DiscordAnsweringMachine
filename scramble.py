@@ -5,6 +5,7 @@ import time
 from time import gmtime, strftime
 from googletrans import Translator
 import random
+import talk
 from gtts.lang import tts_langs
 
 
@@ -30,7 +31,7 @@ def roundtranslate(string, who):
         words = translator.translate(string, dest=language).text
         print(lang[language], words)
 
-    play(translator.translate(words, dest="en").text, who)
+    talk.play(translator.translate(words, dest="en").text, who)
 
 
 def translate(string):
@@ -44,15 +45,6 @@ def translate(string):
     name = strftime("%Y%m%d%H%M%S", gmtime())
     talk.save(name + ".mp3")
     playsound(name + ".mp3")
-    os.remove(name + ".mp3")
-
-
-def play(string, who, lan= "en-au"):
-    name = strftime("%Y%m%d%H%M%S", gmtime())
-    tts = gTTS(string, lan)
-    tts.save(name + ".mp3")
-    playsound(name + ".mp3")
-    time.sleep(3)
     os.remove(name + ".mp3")
 
 
