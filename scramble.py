@@ -5,149 +5,51 @@ import time
 from time import gmtime, strftime
 from googletrans import Translator
 import random
+from gtts.lang import tts_langs
 
-lang = {
-    'af': 'afrikaans',
-    'sq': 'albanian',
-    'am': 'amharic',
-    'ar': 'arabic',
-    'hy': 'armenian',
-    'az': 'azerbaijani',
-    'eu': 'basque',
-    'be': 'belarusian',
-    'bn': 'bengali',
-    'bs': 'bosnian',
-    'bg': 'bulgarian',
-    'ca': 'catalan',
-    'ceb': 'cebuano',
-    'ny': 'chichewa',
-    'zh-cn': 'chinese (simplified)',
-    'zh-tw': 'chinese (traditional)',
-    'co': 'corsican',
-    'hr': 'croatian',
-    'cs': 'czech',
-    'da': 'danish',
-    'nl': 'dutch',
-    'en': 'english',
-    'eo': 'esperanto',
-    'et': 'estonian',
-    'tl': 'filipino',
-    'fi': 'finnish',
-    'fr': 'french',
-    'fy': 'frisian',
-    'gl': 'galician',
-    'ka': 'georgian',
-    'de': 'german',
-    'el': 'greek',
-    'gu': 'gujarati',
-    'ht': 'haitian creole',
-    'ha': 'hausa',
-    'haw': 'hawaiian',
-    'iw': 'hebrew',
-    'hi': 'hindi',
-    'hmn': 'hmong',
-    'hu': 'hungarian',
-    'is': 'icelandic',
-    'ig': 'igbo',
-    'id': 'indonesian',
-    'ga': 'irish',
-    'it': 'italian',
-    'ja': 'japanese',
-    'jw': 'javanese',
-    'kn': 'kannada',
-    'kk': 'kazakh',
-    'km': 'khmer',
-    'ko': 'korean',
-    'ku': 'kurdish (kurmanji)',
-    'ky': 'kyrgyz',
-    'lo': 'lao',
-    'la': 'latin',
-    'lv': 'latvian',
-    'lt': 'lithuanian',
-    'lb': 'luxembourgish',
-    'mk': 'macedonian',
-    'mg': 'malagasy',
-    'ms': 'malay',
-    'ml': 'malayalam',
-    'mt': 'maltese',
-    'mi': 'maori',
-    'mr': 'marathi',
-    'mn': 'mongolian',
-    'my': 'myanmar (burmese)',
-    'ne': 'nepali',
-    'no': 'norwegian',
-    'ps': 'pashto',
-    'fa': 'persian',
-    'pl': 'polish',
-    'pt': 'portuguese',
-    'pa': 'punjabi',
-    'ro': 'romanian',
-    'ru': 'russian',
-    'sm': 'samoan',
-    'gd': 'scots gaelic',
-    'sr': 'serbian',
-    'st': 'sesotho',
-    'sn': 'shona',
-    'sd': 'sindhi',
-    'si': 'sinhala',
-    'sk': 'slovak',
-    'sl': 'slovenian',
-    'so': 'somali',
-    'es': 'spanish',
-    'su': 'sundanese',
-    'sw': 'swahili',
-    'sv': 'swedish',
-    'tg': 'tajik',
-    'ta': 'tamil',
-    'te': 'telugu',
-    'th': 'thai',
-    'tr': 'turkish',
-    'uk': 'ukrainian',
-    'ur': 'urdu',
-    'uz': 'uzbek',
-    'vi': 'vietnamese',
-    'cy': 'welsh',
-    'xh': 'xhosa',
-    'yi': 'yiddish',
-    'yo': 'yoruba',
-    'zu': 'zulu',
-    'fil': 'Filipino',
-    'he': 'Hebrew'
-}
 
-def roundtranslate(string):
+lang = {'de': 'german', 'uk': 'ukrainian', 'si': 'sinhala', 'vi': 'vietnamese', 'sq': 'albanian', 'km': 'khmer', 'mk': 'macedonian', 'pl': 'polish', 'la': 'latin', 'nl': 'dutch', 'lv': 'latvian', 'is': 'icelandic', 'el': 'greek', 'bs': 'bosnian', 'eo': 'esperanto', 'ca': 'catalan', 'en': 'english', 'ro': 'romanian', 'cs': 'czech', 'pt': 'portuguese',
+        'zh-cn': 'chinese (simplified)', 'ko': 'korean', 'su': 'sundanese', 'fr': 'french', 'sr': 'serbian', 'hi': 'hindi', 'da': 'danish', 'af': 'afrikaans', 'te': 'telugu', 'ta': 'tamil', 'cy': 'welsh', 'sk': 'slovak', 'no': 'norwegian', 'hu': 'hungarian', 'id': 'indonesian', 'tr': 'turkish', 'th': 'thai', 'sw': 'swahili', 'es': 'spanish', 'ja': 'japanese', 'my': 'myanmar (burmese)', 'tl': 'filipino', 'et': 'estonian', 'fi': 'finnish', 'zh-tw': 'chinese (traditional)', 'it': 'italian', 'ru': 'russian', 'ar': 'arabic', 'hy': 'armenian', 'sv': 'swedish', 'hr': 'croatian', 'mr': 'marathi', 'bn': 'bengali', 'ne': 'nepali', 'ml': 'malayalam', 'jw': 'javanese'}
+
+def randomise(string, who):
+    language = random.choice(list(lang))
+    translator = Translator()
+    print(lang[language])
+    play(translator.translate(string, dest=language).text,who, language)
+
+
+def roundtranslate(string, who):
     langs = set()
+    print(len(lang))
     while len(langs) < 30:
         langs.add(random.choice(list(lang)))
     translator = Translator()
     words = string
     print("Starting String", words)
     for language in langs:
-        words = translator.translate(string, dest = language).text
+        words = translator.translate(string, dest=language).text
         print(lang[language], words)
 
-
-    return translator.translate(words, dest = "en").text
-
+    play(translator.translate(words, dest="en").text, who)
 
 
 def translate(string):
     translator = Translator()
     language = random.choice(list(lang))
     #language = 'fr'
-    translated = translator.translate(string, dest = language).text
-    print(language, lang[language], translator.translate(string, dest = language).text)
+    translated = translator.translate(string, dest=language).text
+    print(language, lang[language], translator.translate(
+        string, dest=language).text)
     talk = gTTS(translated, 'en-au')
     name = strftime("%Y%m%d%H%M%S", gmtime())
-    talk.save(name +".mp3")
-    playsound(name+".mp3")
-
+    talk.save(name + ".mp3")
+    playsound(name + ".mp3")
     os.remove(name + ".mp3")
 
 
-def play(string, who):
+def play(string, who, lan= "en-au"):
     name = strftime("%Y%m%d%H%M%S", gmtime())
-    tts = gTTS(string, 'en-au')
+    tts = gTTS(string, lan)
     tts.save(name + ".mp3")
     playsound(name + ".mp3")
     time.sleep(3)
@@ -155,7 +57,9 @@ def play(string, who):
 
 
 if __name__ == '__main__':
-    #for i in range(0,10):
-        #translate("hello bitches")
-    print("end string", roundtranslate("would you like to have a drink after work?"))
+    roundtranslate("Whats up my homies", "Jack")
+    # for i in range(0,10):
+    #translate("hello bitches")
+    #print("end string", roundtranslate("The quick brown fox jumps over the lazy dog"))
+    # print(gtts.gTTS.LANGUAGES)
     #play("Hello Bitches", "Jack")
