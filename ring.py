@@ -31,8 +31,8 @@ async def on_message(message):
 
     if message.content.startswith('$translate'):
         words =message.content[6:]
-        scramble.translate(words, message.author.display_name)
-        await message.channel.send(str('Lets hope someone in the Garrage! speeks that language | '+words))
+        lang = scramble.translate(words, message.author.display_name)
+        await message.channel.send(str('Lets hope someone in the Garrage! speaks | '+lang+words))
 
     if message.content.startswith("rick"):
         talk.play("Hey Google play never gonna give you up",message.author.display_name)

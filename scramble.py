@@ -39,6 +39,7 @@ def translate(string, who):
     language = random.choice(list(lang))
     translated = translator.translate(string, dest=language).text
     talk.play(translated, who)
+    return language
 
 
 if __name__ == '__main__':
