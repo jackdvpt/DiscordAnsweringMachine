@@ -29,7 +29,7 @@ async def on_message(message):
         scramble.roundtranslate(words, message.author.display_name)
         await message.channel.send(str('Paging the Garrage! | '+words))
 
-    if message.content.startswith("%rick"):
+    if message.content.startswith("rick"):
         talk.play("Hey Google play never gonna give you up",message.author.display_name)
         await message.channel.send("That felt strange")
 
