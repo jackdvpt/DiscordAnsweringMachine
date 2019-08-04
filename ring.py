@@ -26,8 +26,8 @@ async def on_message(message):
 
     if message.content.startswith('$scramble'):
         words =message.content[6:]
-        scramble.roundtranslate(words, message.author.display_name)
-        await message.channel.send(str('Paging the Garrage! | '+words))
+        final = scramble.roundtranslate(words, message.author.display_name)
+        await message.channel.send(str('Paging the Garrage! | '+final))
 
     if message.content.startswith('$translate'):
         words =message.content[6:]

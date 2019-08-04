@@ -24,8 +24,9 @@ def roundtranslate(string, who):
     for language in langs:
         words = translator.translate(string, dest=language).text
         print(lang[language], words)
-
-    talk.play(translator.translate(words, dest="en").text, who)
+    final = translator.translate(words, dest="en").text, who
+    talk.play(final)
+    return final
 
 
 def translate(string, who):
