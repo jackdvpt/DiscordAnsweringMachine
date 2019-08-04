@@ -34,18 +34,11 @@ def roundtranslate(string, who):
     talk.play(translator.translate(words, dest="en").text, who)
 
 
-def translate(string):
+def translate(string, who):
     translator = Translator()
     language = random.choice(list(lang))
-    #language = 'fr'
     translated = translator.translate(string, dest=language).text
-    print(language, lang[language], translator.translate(
-        string, dest=language).text)
-    talk = gTTS(translated, 'en-au')
-    name = strftime("%Y%m%d%H%M%S", gmtime())
-    talk.save(name + ".mp3")
-    playsound(name + ".mp3")
-    os.remove(name + ".mp3")
+    talk.play(translated, who)
 
 
 if __name__ == '__main__':
