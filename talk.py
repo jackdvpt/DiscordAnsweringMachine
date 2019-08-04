@@ -9,10 +9,10 @@ def play(string, who):
     talk = who+" says " + string
     tts = gTTS(talk, 'en-au')
     tts.save(name+".mp3")
-    os.system("vlc ring.wav vlc://quit")
-    os.system("vlc"+name+".mp3 vlc://quit")
-    time.sleep(3)
+    os.system("omxplayer -o asla ring.wav")
+    os.system("mpg321 -1 "+name+".mp3")
+    #time.sleep(3)
     os.remove(name+".mp3")
 
 if __name__ == '__main__':
-    play("hello Bitches", "Jack")
+    play("k k kk. k", "Jack")
